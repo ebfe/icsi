@@ -42,8 +42,8 @@ func isnxdomain(err error) bool {
 	return false
 }
 
-func QueryStatus(sha []byte) (Status, error) {
-	ips, err := net.LookupIP(dnsname(sha))
+func QueryStatus(hash []byte) (Status, error) {
+	ips, err := net.LookupIP(dnsname(hash))
 	if err != nil {
 		if isnxdomain(err) {
 			return Unknown, nil
@@ -131,8 +131,8 @@ func parseResponse(txt string) (*Response, error) {
 
 }
 
-func Query(sha []byte) (*Response, error) {
-	txts, err := net.LookupTXT(dnsname(sha))
+func Query(hash []byte) (*Response, error) {
+	txts, err := net.LookupTXT(dnsname(hash))
 	if err != nil {
 		if isnxdomain(err) {
 			return nil, nil
