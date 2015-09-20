@@ -1,3 +1,6 @@
+// Package icsi provides an interface to the ICSI certificate notary
+//
+// http://notary.icsi.berkeley.edu/
 package icsi
 
 import (
