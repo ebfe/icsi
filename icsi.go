@@ -2,6 +2,8 @@ package icsi
 
 import (
 	"bytes"
+	"crypto/sha1"
+	"crypto/x509"
 	"errors"
 	"fmt"
 	"net"
@@ -144,4 +146,10 @@ func Query(sha []byte) (*Response, error) {
 
 	return parseResponse(txts[0])
 
+}
+
+func Hash(cert *x509.Certificate) []byte {
+	h := sha1.New()
+	h.Write(cert.Raw)
+	return h.Sum(nil)
 }
