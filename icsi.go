@@ -75,7 +75,7 @@ func parseDate(s string) (time.Time, error) {
 	if err != nil {
 		return time.Time{}, err
 	}
-	return time.Unix(0, 0).AddDate(0, 0, int(i)), nil
+	return time.Unix(0, 0).UTC().AddDate(0, 0, int(i)), nil
 }
 
 func parseResponse(txt string) (*Response, error) {
