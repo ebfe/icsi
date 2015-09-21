@@ -1,6 +1,7 @@
 package icsi
 
 import (
+	"encoding/hex"
 	"reflect"
 	"testing"
 	"time"
@@ -24,4 +25,20 @@ func TestParseResponse(t *testing.T) {
 	if !reflect.DeepEqual(out, r) {
 		t.Fatalf("expected: %+v\ngot: %+v\n", out, r)
 	}
+}
+
+func checkStatus(t *testing.T, hash []byte, expected Status) {
+	status, err := QueryStatus(hash)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if status != expected {
+		t.Fatalf("unexpected status %v %x", status, hash)
+	}
+}
+
+func TestQueryStatus(t *testing.T) {
+	shash, _ := hex.DecodeString("C1956DC8A7DFB2A5A56934DA09778E3A11023358")
+	checkStatus(t, shash, Seen)
+	checkStatus(t, make([]byte, 16), Unknown)
 }
