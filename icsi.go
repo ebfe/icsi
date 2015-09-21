@@ -57,10 +57,11 @@ func QueryStatus(hash []byte) (Status, error) {
 	if len(ips) != 1 {
 		return Unknown, errMultipleRecords
 	}
-	if bytes.Equal(ips[0], ipSeen) {
+	ip := ips[0].To4()
+	if bytes.Equal(ip, ipSeen) {
 		return Seen, nil
 	}
-	if bytes.Equal(ips[0], ipValidated) {
+	if bytes.Equal(ip, ipValidated) {
 		return Validated, nil
 	}
 
